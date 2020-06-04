@@ -1,7 +1,6 @@
 package cn.minsin.feign.annotation;
 
-import cn.minsin.feign.config.RegistryExceptionDecoder;
-import cn.minsin.feign.config.RegistryExceptionHandler;
+import cn.minsin.feign.config.RegistryFeignExceptionHandler;
 import cn.minsin.feign.default_.FeignExceptionDecoder;
 import cn.minsin.feign.default_.FeignExceptionHandler;
 import feign.codec.ErrorDecoder;
@@ -21,7 +20,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @Documented
-@Import({RegistryExceptionHandler.class, RegistryExceptionDecoder.class})
+@Import({RegistryFeignExceptionHandler.class})
 public @interface EnableFeignExceptionHandler {
 
     /**
