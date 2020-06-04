@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author: minton.zhang
@@ -42,5 +43,17 @@ public class ExceptionModel {
      * 抛出的异常 全称 java.lang.RuntimeException
      */
     private String throwExceptionClass;
+
+    /**
+     * 异常链
+     */
+    private List<ExceptionChain> exceptionChain;
+
+//    /**
+//     * 原始异常信息
+//     */
+//    private String rawExceptionMessage;
+//
+//    private
 
 }

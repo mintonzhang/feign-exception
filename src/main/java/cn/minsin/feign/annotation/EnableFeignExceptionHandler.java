@@ -25,12 +25,12 @@ import java.lang.annotation.Target;
 public @interface EnableFeignExceptionHandler {
 
     /**
-     * feign异常处理
+     * 异常抛出处理类, 必须要有无参构造方法
      */
     Class<? extends ErrorAttributes> handlerClass() default FeignExceptionHandler.class;
 
     /**
-     * feign 异常处理器类
+     * 异常解析处理类, 必须要有无参构造方法
      */
     Class<? extends ErrorDecoder> decoderClass() default FeignExceptionDecoder.class;
 }

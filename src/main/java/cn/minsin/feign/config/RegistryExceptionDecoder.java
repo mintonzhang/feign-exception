@@ -26,7 +26,6 @@ public class RegistryExceptionDecoder implements ImportBeanDefinitionRegistrar {
 
         AnnotationAttributes annotationAttributes = AnnotationAttributes.fromMap(annotationMetadata.getAnnotationAttributes(EnableFeignExceptionHandler.class.getName()));
         Class<? extends ErrorDecoder> decoderClass = annotationAttributes.getClass("decoderClass");
-
         ErrorDecoder errorDecoder = BeanUtils.instantiateClass(decoderClass);
 
         AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder
@@ -34,6 +33,7 @@ public class RegistryExceptionDecoder implements ImportBeanDefinitionRegistrar {
                 .setAutowireMode(AUTOWIRE_BY_TYPE)
                 .getBeanDefinition();
         registry.registerBeanDefinition(beanDefinition.getBeanClassName(), beanDefinition);
+        EnableFeignExceptionHandlerContext.setEnableFeignExceptionHandler(annotationAttributes);
         log.debug("The '{}' autowire succeed", decoderClass);
     }
 

@@ -2,7 +2,7 @@ package cn.minsin.feign.default_;
 
 import cn.minsin.feign.exception.RemoteCallException;
 import cn.minsin.feign.model.ExceptionModel;
-import com.alibaba.fastjson.JSONObject;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import feign.Response;
 import feign.Util;
 import feign.codec.ErrorDecoder;
@@ -18,12 +18,16 @@ import java.io.Reader;
  */
 @Slf4j
 public class FeignExceptionDecoder implements ErrorDecoder {
+
+    private final static ObjectMapper JSON = new ObjectMapper();
+
+    @Override
     public Exception decode(String methodKey, Response response) {
         try {
             Reader reader = response.body().asReader();
             String body = Util.toString(reader);
-            ExceptionModel exceptionModel = JSONObject.parseObject(body, ExceptionModel.class);
-            return new RemoteCallException(exceptionModel.getMessage());
+            ExceptionModel exceptionModel = JSON.readValue(body, ExceptionModel.class);
+            return new RemoteCallException(exceptionModel.getMessage(), exceptionModel.getExceptionChain());
         } catch (Exception e) {
             log.error("{} has an unknown exception.", methodKey, e);
             return new RemoteCallException("unKnowException", e);

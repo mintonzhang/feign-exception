@@ -7,7 +7,8 @@ package cn.minsin.feign.constant;
 public interface ExceptionConstant {
 
     /**
-     * 所发生的的异常
+     * 异常链
      */
-    String THROW_EXCEPTION_CLASS = "throwExceptionClass";
+    String EXCEPTION_CHAIN_KEY = "exceptionChain";
+
 }
