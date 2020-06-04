@@ -4,7 +4,7 @@ package cn.minsin.feign.config;
  * @author: minton.zhang
  * @since: 2020/6/4 14:54
  */
-public class FeignExceptionHandlerContext {
+public final class FeignExceptionHandlerContext {
 
 
     private static String APPLICATION_NAME;

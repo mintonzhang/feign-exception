@@ -31,26 +31,27 @@ public class RegistryFeignExceptionHandler implements ImportBeanDefinitionRegist
         Class<? extends ErrorDecoder> decoderClass = annotationAttributes.getClass("decoderClass");
         ErrorDecoder errorDecoder = BeanUtils.instantiateClass(decoderClass);
 
-        AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder
+        AbstractBeanDefinition decoder = BeanDefinitionBuilder
                 .genericBeanDefinition(ErrorDecoder.class, () -> errorDecoder)
                 .setAutowireMode(AUTOWIRE_BY_TYPE)
                 .getBeanDefinition();
-        registry.registerBeanDefinition(beanDefinition.getBeanClassName(), beanDefinition);
+        registry.registerBeanDefinition(decoder.getBeanClassName(), decoder);
 
         Class<? extends ErrorAttributes> handlerClass = annotationAttributes.getClass("handlerClass");
 
         ErrorAttributes errorAttributes = BeanUtils.instantiateClass(handlerClass);
 
-        AbstractBeanDefinition beanDefinition1 = BeanDefinitionBuilder
+        AbstractBeanDefinition handler = BeanDefinitionBuilder
                 .genericBeanDefinition(ErrorAttributes.class, () -> errorAttributes)
                 .setAutowireMode(AUTOWIRE_BY_TYPE)
                 .getBeanDefinition();
-        registry.registerBeanDefinition(beanDefinition1.getBeanClassName(), beanDefinition1);
+        registry.registerBeanDefinition(handler.getBeanClassName(), handler);
     }
 
 
     @Override
     public void setEnvironment(Environment environment) {
+        //get the application name of project
         String property = environment.getProperty("spring.application.name");
         FeignExceptionHandlerContext.setApplicationName(property);
     }
