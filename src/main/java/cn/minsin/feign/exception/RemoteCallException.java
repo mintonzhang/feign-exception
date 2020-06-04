@@ -65,7 +65,7 @@ public class RemoteCallException extends RuntimeException {
                 String format = DateFormatUtils.format(chain.getTimestamp(), strings);
                 String status = i == 0 ? "HAPPEN" : "THROW";
                 boolean isFinal = size - 1 == i;
-                String message = String.format("[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',path:'%s'", status, format, chain.getExceptionClass(), chain.getMessage(), chain.getPath());
+                String message = String.format("[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',applicationName:'%s',path:'%s'", status, format, chain.getExceptionClass(), chain.getMessage(), chain.getApplicationName(), chain.getPath());
                 err.println(message);
                 if (!isFinal) {
                     err.println("↓↓↓↓Throw an exception↓↓↓↓");

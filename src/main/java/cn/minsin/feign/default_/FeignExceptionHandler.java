@@ -1,5 +1,6 @@
 package cn.minsin.feign.default_;
 
+import cn.minsin.feign.config.FeignExceptionHandlerContext;
 import cn.minsin.feign.constant.ExceptionConstant;
 import cn.minsin.feign.exception.RemoteCallException;
 import cn.minsin.feign.model.ExceptionChain;
@@ -41,6 +42,7 @@ public class FeignExceptionHandler extends DefaultErrorAttributes {
         exceptionChain.setMessage(error.getMessage());
         exceptionChain.setPath(errorAttributes.get("path").toString());
         exceptionChain.setTimestamp(new Date());
+        exceptionChain.setApplicationName(FeignExceptionHandlerContext.getApplicationName());
         //添加发生的异常类信息 以便下一步处理
         if (error.getClass() != null) {
             exceptionChain.setExceptionClass(error.getClass().getTypeName());

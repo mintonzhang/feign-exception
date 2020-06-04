@@ -32,4 +32,9 @@ public class ExceptionChain {
      * the feign client path url
      */
     private String path;
+
+    /**
+     *
+     */
+    private String applicationName;
 }
