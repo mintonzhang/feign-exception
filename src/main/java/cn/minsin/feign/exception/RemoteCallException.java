@@ -56,7 +56,7 @@ public class RemoteCallException extends RuntimeException {
             PrintStream err = System.err;
             ExceptionChain exceptionChain = exceptionChains.get(0);
             String exceptionClass = exceptionChain.getExceptionClass();
-            String title = String.format("The exception may not have occurred in the current service. exception class:'%s',and message is:'%s'", exceptionClass, exceptionChain.getMessage());
+            String title = String.format("The exception happened in '%s'. exception class:'%s',and message is:'%s'", exceptionChain.getApplicationName(), exceptionClass, exceptionChain.getMessage());
             err.println(title);
             String strings = "yyyy-MM-dd HH:mm:ss.SSS";
             int size = exceptionChains.size();

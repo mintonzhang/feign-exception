@@ -54,7 +54,14 @@
         </dependency>
 
     </dependencies>
+    <repositories>
+        <repository>
+            <!-- 默认优先获取阿里云的依赖-->
+            <id>aliyun</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+        </repository>
 
+    </repositories>
     <build>
         <plugins>
             <plugin>
