@@ -11,7 +11,7 @@
 ```xml
 maven用户
 
-<!-- https://mvnrepository.com/artifact/cn.minsin/mutils-core -->
+<!-- https://mvnrepository.com/artifact/cn.minsin/feign-exception -->
 <dependency>
     <groupId>cn.minsin.feign</groupId>
     <artifactId>feign-exception</artifactId>
@@ -59,16 +59,17 @@ cn.minsin.feign.exception.RemoteCallException : 模拟错误
 	[THROW]:[provider] timestamp:'2020-06-05 17:25:54.071',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/data1'.(:0)
 	[END]:[consumer] timestamp:'2020-06-05 17:25:54.072',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata1'.(:0)
 ```
-#### 输出格式: 
-**[status]:[applicationName] timestamp:'timestamp',exceptionClass:'exception',message:'message',path: 'url'**
+######  输出格式: 
+**格式==>[status]:[applicationName] timestamp:'timestamp',exceptionClass:'exception',message:'message',path: 'url'**
+
 - status 状态 有HAPPEN、THROW、END三种。流程 HAPPEN==>THROW==>END 当多个服务调用时 THROW会出现多个 
 - applicationName 发生异常的application-name
 - timestamp 出现异常的时间 格式yyyy-MM-dd HH:mm:ss.SSS
 - exception 出现的异常全称
 - message 异常返回的message
-- path feign请求的url applicationName/url
+- path feign请求的url 
 
-** 注意:错误栈信息是以发生时间升序排列，也就是最开始发生的异常在最上面。**
+**注意:错误栈信息是以发生时间升序排列，也就是最开始发生的异常在最上面。**
 
 ### 3.代码说明
 
