@@ -13,16 +13,15 @@ public final class FeignExceptionHandlerContext {
 
 
     public static String getApplicationName() {
-        return ENVIRONMENT.getProperty("spring.application.name");
+        return ENVIRONMENT == null ? "unknownServer" : ENVIRONMENT.getProperty("spring.application.name");
     }
-
 
     public static Environment getEnvironment() {
         return ENVIRONMENT;
     }
 
     public static void setEnvironment(Environment environment) {
-        if (ENVIRONMENT != null) {
+        if (ENVIRONMENT == null) {
             FeignExceptionHandlerContext.ENVIRONMENT = environment;
         }
     }
