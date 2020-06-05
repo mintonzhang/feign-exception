@@ -52,7 +52,6 @@ public class RegistryFeignExceptionHandler implements ImportBeanDefinitionRegist
     @Override
     public void setEnvironment(Environment environment) {
         //get the application name of project
-        String property = environment.getProperty("spring.application.name");
-        FeignExceptionHandlerContext.setApplicationName(property);
+        FeignExceptionHandlerContext.setEnvironment(environment);
     }
 }

@@ -1,5 +1,7 @@
 package cn.minsin.feign.config;
 
+import org.springframework.core.env.Environment;
+
 /**
  * @author: minton.zhang
  * @since: 2020/6/4 14:54
@@ -7,16 +9,21 @@ package cn.minsin.feign.config;
 public final class FeignExceptionHandlerContext {
 
 
-    private static String APPLICATION_NAME;
+    private static Environment ENVIRONMENT;
 
 
     public static String getApplicationName() {
-        return APPLICATION_NAME;
+        return ENVIRONMENT.getProperty("spring.application.name");
     }
 
-    public static void setApplicationName(String applicationName) {
-        if (APPLICATION_NAME == null) {
-            APPLICATION_NAME = applicationName;
+
+    public static Environment getEnvironment() {
+        return ENVIRONMENT;
+    }
+
+    public static void setEnvironment(Environment environment) {
+        if (ENVIRONMENT != null) {
+            FeignExceptionHandlerContext.ENVIRONMENT = environment;
         }
     }
 }
