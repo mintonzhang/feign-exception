@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: consumer
+  cloud:
+    nacos:
+      server-addr: 120.26.174.221:8848 #免费注册中心,内存小
+server:
+  port: 9090
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000

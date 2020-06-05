@@ -12,6 +12,7 @@ import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
+import org.springframework.core.annotation.Order;
 import org.springframework.core.env.Environment;
 import org.springframework.core.type.AnnotationMetadata;
 
@@ -21,6 +22,7 @@ import static org.springframework.beans.factory.config.AutowireCapableBeanFactor
  * @author: minton.zhang
  * @since: 2020/6/3 18:38
  */
+@Order(88)
 @Slf4j
 public class RegistryFeignExceptionHandler implements ImportBeanDefinitionRegistrar, EnvironmentAware {
 
@@ -46,6 +48,11 @@ public class RegistryFeignExceptionHandler implements ImportBeanDefinitionRegist
                 .setAutowireMode(AUTOWIRE_BY_TYPE)
                 .getBeanDefinition();
         registry.registerBeanDefinition(handler.getBeanClassName(), handler);
+
+        boolean infoEnabled = log.isInfoEnabled();
+        if (infoEnabled) {
+            log.info("'{}' and '{}' has been successfully registered", handler.getBeanClassName(), decoder.getBeanClassName());
+        }
     }
 
 

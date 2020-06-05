@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: provider
+  cloud:
+    nacos:
+      server-addr: 120.26.174.221:8848 #免费注册中心,内存小
+
+ribbon:
+  ReadTimeout: 120000
+  ConnectTimeout: 30000
