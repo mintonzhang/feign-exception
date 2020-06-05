@@ -49,11 +49,4 @@ public class ExceptionModel {
      */
     private List<ExceptionChain> exceptionChain;
 
-//    /**
-//     * 原始异常信息
-//     */
-//    private String rawExceptionMessage;
-//
-//    private
-
 }

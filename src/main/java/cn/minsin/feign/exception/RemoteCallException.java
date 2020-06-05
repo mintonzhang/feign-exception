@@ -82,63 +82,6 @@ public class RemoteCallException extends RuntimeException {
         return rawExceptionInfo != null && rawExceptionInfo.isAssignableFrom(exception);
     }
 
-
-//    public String detailInformation() {
-//        //获取Request对象
-//        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-//        String requestPath = "";
-//        if (requestAttributes instanceof ServletRequestAttributes) {
-//            requestPath = ((ServletRequestAttributes) requestAttributes).getRequest().getRequestURI();
-//        }
-//
-//        ExceptionChain exceptionChain = exceptionChains.get(0);
-//        String exceptionClass = exceptionChain.getExceptionClass();
-//
-//        String title = String.format("\t======>The exception happened in '%s'. exception class:'%s',and message is:'%s'", exceptionChain.getApplicationName(), exceptionClass, exceptionChain.getMessage());
-//        StringBuilder stringBuilder = new StringBuilder(title).append("\n");
-//        String strings = "yyyy-MM-dd HH:mm:ss.SSS";
-//        int size = exceptionChains.size();
-//        for (int i = 0; i < size; i++) {
-//            ExceptionChain chain = exceptionChains.get(i);
-//            String format = DateFormatUtils.format(chain.getTimestamp(), strings);
-//            String status = i == 0 ? "HAPPEN" : "THROW";
-//            String message = String.format("\t======>[%s]:[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',path:'%s'", status, chain.getApplicationName(), format, chain.getExceptionClass(), chain.getMessage(), chain.getPath());
-//            stringBuilder.append("\n").append(message).append("\n").append("\t======>↓↓↓↓Throw out↓↓↓↓");
-//        }
-//        stringBuilder.append("\n").append(String.format("\t======>[END]:[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',path:'%s'", FeignExceptionHandlerContext.getApplicationName(), DateFormatUtils.format(new Date(), strings), this.getClass(), exceptionChain.getMessage(), requestPath));
-//
-//        return stringBuilder.toString();
-//    }
-
-//    public String detailInformation() {
-//        //获取Request对象
-//        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-//        String requestPath = "";
-//        if (requestAttributes instanceof ServletRequestAttributes) {
-//            requestPath = ((ServletRequestAttributes) requestAttributes).getRequest().getRequestURI();
-//        }
-//
-//        ExceptionChain exceptionChain = exceptionChains.get(0);
-//        String exceptionClass = exceptionChain.getExceptionClass();
-//
-//        String title = String.format("\t======>The exception happened in '%s'. exception class:'%s',and message is:'%s'", exceptionChain.getApplicationName(), exceptionClass, exceptionChain.getMessage());
-//        StringBuilder stringBuilder = new StringBuilder(title).append("\n");
-//        String strings = "yyyy-MM-dd HH:mm:ss.SSS";
-//        int size = exceptionChains.size();
-//        for (int i = 0; i < size; i++) {
-//            ExceptionChain chain = exceptionChains.get(i);
-//            String format = DateFormatUtils.format(chain.getTimestamp(), strings);
-//            String status = i == 0 ? "HAPPEN" : "THROW";
-//            this.create(chain, status);
-//        }
-//
-//        this.create(chain, "END");
-//        stringBuilder.append("\n").append(String.format("\t======>[END]:[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',path:'%s'", FeignExceptionHandlerContext.getApplicationName(), DateFormatUtils.format(new Date(), strings), this.getClass(), exceptionChain.getMessage(), requestPath));
-//
-//        return stringBuilder.toString();
-//    }
-
-
     @Override
     public String toString() {
         if (!isAddThis) {
