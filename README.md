@@ -130,7 +130,7 @@ public class FeignExceptionHandler extends DefaultErrorAttributes {
 }
 
 ```
-作用:当其他feign客户端在调用接口时,如果本服务发送异常,应该怎么返回异常信息？可以理解为异常处理器器抛出=>异常解析器。需要实现ErrorAttributes
+作用:当其他feign客户端在调用接口时,如果本服务发送异常,应该怎么返回异常信息？可以理解为异常处理器抛出=>异常解析器。需要实现ErrorAttributes
  - 默认异常解析器
 ```java
 //FeignExceptionDecoder    
@@ -152,11 +152,7 @@ public class FeignExceptionDecoder implements ErrorDecoder {
 }
 ```
 作用：异常解析器,需要实现ErrorDecoder。作用是,当feign服务调用其他服务出现异常,收到的异常数据流处理类.
-```java
-//默认
 
-```
-    
  - 自定义异常处理器及解析器 
  异常处理器需要实现ErrorAttributes、异常解析器需要实现ErrorDecoder .然后使用@EnableFeignExceptionHandler,代码如下
  
