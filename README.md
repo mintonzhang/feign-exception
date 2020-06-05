@@ -1,3 +1,4 @@
+[TOC]
 # feign-exception 使用说明
 
 ##### 前言
@@ -25,15 +26,15 @@ maven用户
 
 ### 2.优势
 
-##### 	1.体积小
+##### 	2.1.体积小
 
 ​		jar包没有集成任何额外第三方jar，纯spring相关组件。
 
-##### 	2.使用简单，注解启动
+##### 	2.2.使用简单，注解启动
 
 ​		只需要一个注解即可开启，如不加注解,不会自动配置任何启动项。
 
-##### 	3.重写printStackTrace, 链路清晰,排查异常清晰(栈信息是倒序打印出来的)
+##### 	2.3.重写printStackTrace, 链路清晰,排查异常清晰(栈信息是倒序打印出来的)
 
 ```text
 Slf4j打印到控制台:
@@ -129,7 +130,7 @@ public class FeignExceptionHandler extends DefaultErrorAttributes {
     }
 }
 
-```
+ ```
 作用:当其他feign客户端在调用接口时,如果本服务发送异常,应该怎么返回异常信息？可以理解为异常处理器抛出=>异常解析器。需要实现ErrorAttributes
  - 默认异常解析器
 ```java
@@ -155,7 +156,7 @@ public class FeignExceptionDecoder implements ErrorDecoder {
 
  - 自定义异常处理器及解析器 
  异常处理器需要实现ErrorAttributes、异常解析器需要实现ErrorDecoder .然后使用@EnableFeignExceptionHandler,代码如下
- 
+
 ```java
 @EnableDiscoveryClient
 @SpringBootApplication
