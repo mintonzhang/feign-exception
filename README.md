@@ -61,7 +61,7 @@ cn.minsin.feign.exception.RemoteCallException : 模拟错误
 ```
 #### 输出格式: 
 **[status]:[applicationName] timestamp:'timestamp',exceptionClass:'exception',message:'message',path: 'url'**
-- status 状态 有HAPPEN、THROW、END三种 分别代表每个服务是怎么处理异常的
+- status 状态 有HAPPEN、THROW、END三种。流程 HAPPEN==>THROW==>END 当多个服务调用时 THROW会出现多个 
 - applicationName 发生异常的application-name
 - timestamp 出现异常的时间 格式yyyy-MM-dd HH:mm:ss.SSS
 - exception 出现的异常全称
