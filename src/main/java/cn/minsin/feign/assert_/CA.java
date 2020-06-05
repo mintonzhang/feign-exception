@@ -6,8 +6,7 @@ import lombok.NonNull;
 import java.util.Objects;
 
 /**
- * C mean Condition
- * A mean Assert
+ * Conditional assertion
  *
  * @author: minton.zhang
  * @since: 2020/5/26 17:02
