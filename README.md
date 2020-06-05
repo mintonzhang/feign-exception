@@ -33,7 +33,42 @@ maven用户
 
 ​		只需要一个注解即可开启，如不加注解,不会自动配置任何启动项。
 
-​	3.
+##### 	3.重写printStackTrace, 链路清晰,排查异常清晰(栈信息是倒序打印出来的)
+
+```text
+Slf4j打印到控制台:
+
+cn.minsin.feign.exception.RemoteCallException: 模拟错误
+	at [HAPPEN]:[provider] timestamp:'2020-06-05 17:18:56.103',exceptionClass:'java.lang.RuntimeException',message:'模拟错误',path: '/data2'.(:0) ~[na:na]
+	at [THROW]:[consumer] timestamp:'2020-06-05 17:18:58.121',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata2'.(:0) ~[na:na]
+	at [THROW]:[provider] timestamp:'2020-06-05 17:18:58.219',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/data1'.(:0) ~[na:na]
+	at [END]:[consumer] timestamp:'2020-06-05 17:18:58.222',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata1'.(:0) ~[na:na]
+
+slf4j打印到日志:
+cn.minsin.feign.exception.RemoteCallException: 模拟错误
+	at [HAPPEN]:[provider] timestamp:'2020-06-05 17:18:56.103',exceptionClass:'java.lang.RuntimeException',message:'模拟错误',path: '/data2'.(:0)
+	at [THROW]:[consumer] timestamp:'2020-06-05 17:18:58.121',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata2'.(:0)
+	at [THROW]:[provider] timestamp:'2020-06-05 17:18:58.219',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/data1'.(:0)
+	at [END]:[consumer] timestamp:'2020-06-05 17:18:58.222',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata1'.(:0)
+
+
+直接使用异常.printStackTrace 打印到控制台
+cn.minsin.feign.exception.RemoteCallException : 模拟错误
+	[HAPPEN]:[provider] timestamp:'2020-06-05 17:25:53.933',exceptionClass:'java.lang.RuntimeException',message:'模拟错误',path: '/data2'.(:0)
+	[THROW]:[consumer] timestamp:'2020-06-05 17:25:54.025',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata2'.(:0)
+	[THROW]:[provider] timestamp:'2020-06-05 17:25:54.071',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/data1'.(:0)
+	[END]:[consumer] timestamp:'2020-06-05 17:25:54.072',exceptionClass:'cn.minsin.feign.exception.RemoteCallException',message:'模拟错误',path: '/cdata1'.(:0)
+```
+#### 输出格式: 
+**[status]:[applicationName] timestamp:'timestamp',exceptionClass:'exception',message:'message',path: 'url'**
+- status 状态 有HAPPEN、THROW、END三种 分别代表每个服务是怎么处理异常的
+- applicationName 发生异常的application-name
+- timestamp 出现异常的时间 格式yyyy-MM-dd HH:mm:ss.SSS
+- exception 出现的异常全称
+- message 异常返回的message
+- path feign请求的url applicationName/url
+
+** 注意:错误栈信息是以发生时间升序排列，也就是最开始发生的异常在最上面。**
 
 ### 3.代码说明
 

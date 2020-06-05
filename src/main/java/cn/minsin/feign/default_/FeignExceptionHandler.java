@@ -51,7 +51,5 @@ public class FeignExceptionHandler extends DefaultErrorAttributes {
         errorAttributes.put(ExceptionConstant.EXCEPTION_CHAIN_KEY, exceptionChains);
         return errorAttributes;
     }
-
-
 }
 

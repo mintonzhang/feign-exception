@@ -37,4 +37,13 @@ public class ExceptionChain {
      *
      */
     private String applicationName;
+
+
+    public boolean isAssignableFrom(Class<? extends Throwable> exception) {
+        try {
+            return exception.isAssignableFrom(Class.forName(exceptionClass));
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
