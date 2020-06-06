@@ -3,7 +3,7 @@
 
 ##### 前言
 
-*在springcloud中 服务与服务之间,通常使用feign进行服务调用。但是在fei中，默认返回feign包装后的异常。eg:如果服务a调用服务b，当服务b发生异常时，如果什么都不处理的话，将抛出feign自带的异常，**并不会携带服务b本身抛出的异常**,本组件就是为了解决这个问题。*
+*在springcloud中 服务与服务之间,通常使用feign进行服务调用。但是在feign中，默认返回feign包装后的异常。eg:如果服务a调用服务b，当服务b发生异常时，如果什么都不处理的话，将抛出feign自带的异常，**并不会携带服务b本身抛出的异常**,本组件就是为了解决这个问题。*
 
 
 
@@ -19,7 +19,31 @@ maven用户
     <version>${last-release}</version>
 </dependency>
 
+```
+#### 注意：Feign是springCloud服务间互相调用的框架,是在http的基础上,所以对应的项目里面必须加入以下依赖或其核心依赖
+```xml
+    <dependencies>
+        <dependency>
+              <!--表示服务是支持feign服务,代表注解 @FeignClient,@EnableFeignClients等-->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <!--表示服务是一个web服务,代表注解 @RequestMapping,@RestController等-->
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
 
+```
+注意:如果没有以上注解或核心注解,已知报错信息如下(其原因是缺少spring-boot-starter-web)：
+```text
+java.lang.annotation.AnnotationFormatError: Invalid default: public abstract java.lang.Class cn.minsin.feign.annotation.EnableFeignExceptionHandler.handlerClass()
+	at java.lang.reflect.Method.getDefaultValue(Method.java:612) ~[na:1.8.0_191]
+	at sun.reflect.annotation.AnnotationType.<init>(AnnotationType.java:132) ~[na:1.8.0_191]
+	at sun.reflect.annotation.AnnotationType.getInstance(AnnotationType.java:85) ~[na:1.8.0_191]
+	at sun.reflect.annotation.AnnotationParser.parseAnnotation2(AnnotationParser.java:266) ~[na:1.8.0_191]
+    省略.....
 ```
 
 
