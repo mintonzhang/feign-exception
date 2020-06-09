@@ -71,7 +71,7 @@ public class RemoteCallException extends BaseRemoteCallException {
      * @return
      */
     @Override
-    public boolean isAssignableFrom(Class<? extends Throwable> exception) {
+    public boolean isInstanceOf(Class<? extends Throwable> exception) {
         ExceptionChain rawExceptionInfo = this.getRawExceptionInfo();
         return rawExceptionInfo != null && rawExceptionInfo.isAssignableFrom(exception);
     }
@@ -148,4 +148,9 @@ public class RemoteCallException extends BaseRemoteCallException {
         this.create(exceptionChain, "END");
     }
 
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class<?> aClass = Class.forName("java.lang.Exception");
+        boolean assignableFrom = RuntimeException.class.isAssignableFrom(aClass);
+        System.out.println(assignableFrom);
+    }
 }
