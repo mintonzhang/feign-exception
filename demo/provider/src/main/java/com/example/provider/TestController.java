@@ -18,7 +18,8 @@ public class TestController {
 
     @GetMapping("/data1")
     public List<String> data1() {
-        return testApi.cdata2();
+        throw new RuntimeException("模拟错误");
+//        return testApi.cdata2();
 //        return Arrays.asList("张三", "李四", "王五");
     }
 

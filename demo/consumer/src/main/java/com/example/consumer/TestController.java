@@ -20,14 +20,7 @@ public class TestController {
 
     @GetMapping("/cdata1")
     public List<String> cdata1() {
-        try{
-            return testApi.data1();
-        }catch(Exception e){
-            e.printStackTrace();
-//            log.error("",e);
-        }
-        return null;
-
+        return testApi.data1();
     }
 
     @GetMapping("/cdata2")
