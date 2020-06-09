@@ -33,8 +33,6 @@ public abstract class BaseRemoteCallException extends RuntimeException {
 
     /**
      * 判断异常是否为原始异常的子类
-     *
-     * @return
      */
     public abstract boolean isAssignableFrom(Class<? extends Throwable> exception);
 

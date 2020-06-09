@@ -61,14 +61,6 @@ public class RemoteCallException extends BaseRemoteCallException {
         }
     }
 
-    /**
-     * 获取原始异常信息
-     */
-    public String getRawMessage() {
-        ExceptionChain rawExceptionInfo = this.getRawExceptionInfo();
-        return rawExceptionInfo == null ? null : rawExceptionInfo.getMessage();
-    }
-
     public ExceptionChain getRawExceptionInfo() {
         return CollectionUtils.isEmpty(exceptionChains) ? null : exceptionChains.get(0);
     }
@@ -112,7 +104,10 @@ public class RemoteCallException extends BaseRemoteCallException {
     }
 
     @Override
-    public BaseRemoteCallException throwException(String message, @NonNull List<ExceptionChain> exceptionChains) {
+    public BaseRemoteCallException throwException(String message,  List<ExceptionChain> exceptionChains) {
+        if(exceptionChains==null){
+            return new RemoteCallException(message);
+        }
         return new RemoteCallException(message, exceptionChains);
     }
 

@@ -27,8 +27,10 @@ public class FeignExceptionDecoder implements ErrorDecoder {
     @Override
     public Exception decode(String methodKey, Response response) {
         try {
+            //↓↓↓↓↓↓↓此处千万别打断点，不然会报 stream is closed的异常↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
             Reader reader = response.body().asReader();
             String body = Util.toString(reader);
+            //↑↑↑↑↑↑↑此处千万别打断点，不然会报 stream is closed的异常↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑
             ExceptionModel exceptionModel = JSON.parseObject(body, ExceptionModel.class);
             return baseRemoteCallException.throwException(exceptionModel.getMessage(), exceptionModel.getExceptionChain());
         } catch (Exception e) {
