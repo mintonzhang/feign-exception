@@ -24,16 +24,6 @@ public abstract class BaseRemoteCallException extends RuntimeException {
 
     public final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
-    @Override
-    public void printStackTrace() {
-        super.printStackTrace();
-    }
-
     public abstract BaseRemoteCallException throwException(String message);
 
     public abstract BaseRemoteCallException throwException(String message, @NonNull List<ExceptionChain> exceptionChains);

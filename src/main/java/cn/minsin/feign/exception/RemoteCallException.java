@@ -29,8 +29,6 @@ public class RemoteCallException extends BaseRemoteCallException {
 
     private boolean isAddThis = false;
 
-    private final static String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss.SSS";
-
     @Override
     public StackTraceElement[] getStackTrace() {
         if (stackTraceElements.isEmpty()) {
@@ -124,13 +122,14 @@ public class RemoteCallException extends BaseRemoteCallException {
     }
 
     private void create(ExceptionChain exceptionChain, String status) {
-        String format = "[%s]:[%s] timestamp:'%s',exceptionClass:'%s',message:'%s',path: '%s'";
+        String format = "[%s]:[`http://%s%s`] timestamp:'%s',message:'%s',exceptionClass:'%s',path: '%s'";
         String str = String.format(format,
                 status,
                 exceptionChain.getApplicationName(),
+                exceptionChain.getPath(),
                 DateFormatUtils.format(exceptionChain.getTimestamp(), DATE_FORMAT),
-                exceptionChain.getExceptionClass(),
                 exceptionChain.getMessage(),
+                exceptionChain.getExceptionClass(),
                 exceptionChain.getPath()
         );
         StackTraceElement stackTraceElement = new StackTraceElement(
