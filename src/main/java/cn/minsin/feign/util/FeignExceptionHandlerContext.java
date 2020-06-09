@@ -1,4 +1,4 @@
-package cn.minsin.feign.config;
+package cn.minsin.feign.util;
 
 import org.springframework.core.env.Environment;
 
@@ -25,4 +25,5 @@ public final class FeignExceptionHandlerContext {
             FeignExceptionHandlerContext.ENVIRONMENT = environment;
         }
     }
+
 }

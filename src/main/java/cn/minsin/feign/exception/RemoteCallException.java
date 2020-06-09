@@ -1,7 +1,7 @@
 package cn.minsin.feign.exception;
 
-import cn.minsin.feign.config.FeignExceptionHandlerContext;
 import cn.minsin.feign.model.ExceptionChain;
+import cn.minsin.feign.util.FeignExceptionHandlerContext;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.util.List;
  * @since: 2020/6/3 22:31
  */
 @Slf4j
-public class RemoteCallException extends RuntimeException {
+public class RemoteCallException extends BaseRemoteCallException {
 
     private final List<StackTraceElement> stackTraceElements = new ArrayList<>(2);
 
@@ -42,6 +42,9 @@ public class RemoteCallException extends RuntimeException {
     @Getter
     private List<ExceptionChain> exceptionChains;
 
+    //仅作为托管给spring的构造器
+    public RemoteCallException() {
+    }
 
     public RemoteCallException(String message) {
         super(message);
@@ -77,6 +80,7 @@ public class RemoteCallException extends RuntimeException {
      *
      * @return
      */
+    @Override
     public boolean isAssignableFrom(Class<? extends Throwable> exception) {
         ExceptionChain rawExceptionInfo = this.getRawExceptionInfo();
         return rawExceptionInfo != null && rawExceptionInfo.isAssignableFrom(exception);
@@ -102,6 +106,21 @@ public class RemoteCallException extends RuntimeException {
         for (StackTraceElement stackTraceElement : stackTraceElements) {
             err.println("\t" + stackTraceElement);
         }
+    }
+
+    @Override
+    public BaseRemoteCallException throwException(String message) {
+        return new RemoteCallException(message);
+    }
+
+    @Override
+    public BaseRemoteCallException throwException(String message, @NonNull List<ExceptionChain> exceptionChains) {
+        return new RemoteCallException(message, exceptionChains);
+    }
+
+    @Override
+    public BaseRemoteCallException throwException(String message, Throwable cause) {
+        return new RemoteCallException(message, cause);
     }
 
     private void create(ExceptionChain exceptionChain, String status) {

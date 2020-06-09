@@ -1,9 +1,9 @@
-package cn.minsin.feign.default_;
+package cn.minsin.feign.config;
 
-import cn.minsin.feign.config.FeignExceptionHandlerContext;
 import cn.minsin.feign.constant.ExceptionConstant;
 import cn.minsin.feign.exception.RemoteCallException;
 import cn.minsin.feign.model.ExceptionChain;
+import cn.minsin.feign.util.FeignExceptionHandlerContext;
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -23,8 +23,12 @@ public class FeignExceptionHandler extends DefaultErrorAttributes {
 
     @Override
     public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
-        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
         Throwable error = super.getError(webRequest);
+        //springMVC异常
+        if (error == null) {
+            return super.getErrorAttributes(webRequest, includeStackTrace);
+        }
+        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
         List<ExceptionChain> exceptionChains = null;
         if (error instanceof RemoteCallException) {
             exceptionChains = ((RemoteCallException) error).getExceptionChains();
