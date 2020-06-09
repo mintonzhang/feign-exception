@@ -1,7 +1,6 @@
 package cn.minsin.feign.config;
 
 import cn.minsin.feign.exception.BaseRemoteCallException;
-import cn.minsin.feign.exception.RemoteCallException;
 import cn.minsin.feign.model.ExceptionModel;
 import com.alibaba.fastjson.JSON;
 import feign.Response;
@@ -35,7 +34,7 @@ public class FeignExceptionDecoder implements ErrorDecoder {
             return baseRemoteCallException.throwException(exceptionModel.getMessage(), exceptionModel.getExceptionChain());
         } catch (Exception e) {
             log.error("{} has an unknown exception.", methodKey, e);
-            return new RemoteCallException("unKnowException", e);
+            return baseRemoteCallException.throwException("unKnowException", e);
         }
 
     }

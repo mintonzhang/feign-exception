@@ -104,8 +104,8 @@ public class RemoteCallException extends BaseRemoteCallException {
     }
 
     @Override
-    public BaseRemoteCallException throwException(String message,  List<ExceptionChain> exceptionChains) {
-        if(exceptionChains==null){
+    public BaseRemoteCallException throwException(String message, List<ExceptionChain> exceptionChains) {
+        if (exceptionChains == null) {
             return new RemoteCallException(message);
         }
         return new RemoteCallException(message, exceptionChains);
