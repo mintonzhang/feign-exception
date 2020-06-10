@@ -147,10 +147,4 @@ public class RemoteCallException extends BaseRemoteCallException {
         exceptionChain.setMessage(this.getMessage());
         this.create(exceptionChain, "END");
     }
-
-    public static void main(String[] args) throws ClassNotFoundException {
-        Class<?> aClass = Class.forName("java.lang.Exception");
-        boolean assignableFrom = RuntimeException.class.isAssignableFrom(aClass);
-        System.out.println(assignableFrom);
-    }
 }

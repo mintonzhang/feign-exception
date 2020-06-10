@@ -16,10 +16,29 @@ public final class FeignExceptionHandlerContext {
         return ENVIRONMENT == null ? "unknownServer" : ENVIRONMENT.getProperty("spring.application.name");
     }
 
+    /**
+     * 获取配置项
+     *
+     * @param name 配置名称
+     * @return
+     */
     public static String getProperty(String name) {
-        return ENVIRONMENT == null ? "unknownServer" : ENVIRONMENT.getProperty(name);
+        return ENVIRONMENT == null ? null : ENVIRONMENT.getProperty(name);
     }
 
+    /**
+     * 获取配置项
+     *
+     * @param name         配置名称
+     * @param defaultValue 默认值
+     */
+    public static String getProperty(String name, String defaultValue) {
+        return ENVIRONMENT == null ? defaultValue : ENVIRONMENT.getProperty(name, defaultValue);
+    }
+
+    /**
+     * 获取环境对象
+     */
     public static Environment getEnvironment() {
         return ENVIRONMENT;
     }

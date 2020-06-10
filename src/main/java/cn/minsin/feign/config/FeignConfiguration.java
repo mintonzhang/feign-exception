@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 这个bean默认不会生效，使用者在FeignClient中指定 FeignConfiguration
+ * feign相关配置项
  */
 @Configuration
 @ConditionalOnClass({Feign.class})

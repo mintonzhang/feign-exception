@@ -23,7 +23,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Documented
 @Import({EnableFeignExceptionHandler.EnvironmentAwareGet.class})
-//导入springMVC判断controller接口的配置
 @ImportAutoConfiguration(classes = {RequestMappingHandlerMappingConfiguration.class, FeignConfiguration.class, OverriderErrorMvcAutoConfiguration.class})
 public @interface EnableFeignExceptionHandler {
 
