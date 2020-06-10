@@ -82,7 +82,7 @@
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
-            <url>https://github.com/mintonzhang/feign-exception/LICENSE.txt</url>
+            <url>https://github.com/mintonzhang/feign-exception/blob/master/LICENSE</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
