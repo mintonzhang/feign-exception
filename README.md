@@ -97,7 +97,7 @@ cn.minsin.feign.exception.RemoteCallException : 模拟错误
 
 **注意:错误栈信息是以发生时间升序排列，也就是最开始发生的异常在最上面。**
 
-### 4.快速上手
+### 3.快速上手
 
 在启动类上加上@EnableFeignExceptionHandler注解即可开启
 
@@ -118,7 +118,7 @@ public class ProviderApplication {
 ```
 
 
-### 5.静态spring常量容器
+### 4.静态spring常量容器
 
 ```java
 public final class FeignExceptionHandlerContext {
@@ -141,8 +141,8 @@ public final class FeignExceptionHandlerContext {
 说明:这个类,在注入时会将当前环境存放进去,但是只能赋值一次。通过Environment 可以获取到yaml或properties中的配置,默认提供获取application name的方法。
 
 
-### 6.CA条件断言 (condition assert)
-```
+### 5.CA条件断言 (condition assert)
+```text
 //DEMO
 public static void main(String[] args) {
         String s =null;
