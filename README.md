@@ -6,6 +6,7 @@
 *在springcloud中 服务与服务之间,通常使用feign进行服务调用。但是在feign中，默认返回feign包装后的异常。eg:如果服务a调用服务b，当服务b发生异常时，如果什么都不处理的话，将抛出feign自带的异常，**并不会携带服务b本身抛出的异常**,本组件就是为了解决这个问题。*
 
 
+### [查看版本RELEASE日志](https://github.com/mintonzhang/feign-exception/releases)
 
 ### 1.版本
 
@@ -115,87 +116,6 @@ public class ProviderApplication {
 }
 
 ```
-
-### 5.核心功能及拓展
- - 默认异常处理器
- ```java
-@Slf4j
-public class FeignExceptionHandler extends DefaultErrorAttributes {
-
-    @Override
-    public Map<String, Object> getErrorAttributes(WebRequest webRequest, boolean includeStackTrace) {
-        Map<String, Object> errorAttributes = super.getErrorAttributes(webRequest, includeStackTrace);
-        Throwable error = super.getError(webRequest);
-        List<ExceptionChain> exceptionChains = null;
-        if (error instanceof RemoteCallException) {
-            exceptionChains = ((RemoteCallException) error).getExceptionChains();
-        } else {
-            Object attribute = webRequest.getAttribute(ExceptionConstant.EXCEPTION_CHAIN_KEY, RequestAttributes.SCOPE_REQUEST);
-            if (attribute != null) {
-                exceptionChains = JSON.parseArray(attribute.toString(), ExceptionChain.class);
-            }
-            if (exceptionChains == null) {
-                exceptionChains = new ArrayList<>(1);
-            }
-        }
-
-        ExceptionChain exceptionChain = new ExceptionChain();
-        exceptionChain.setMessage(error.getMessage());
-        exceptionChain.setPath(errorAttributes.get("path").toString());
-        exceptionChain.setTimestamp(new Date());
-        exceptionChain.setApplicationName(FeignExceptionHandlerContext.getApplicationName());
-        //添加发生的异常类信息 以便下一步处理
-        if (error.getClass() != null) {
-            exceptionChain.setExceptionClass(error.getClass().getTypeName());
-        }
-        exceptionChains.add(exceptionChain);
-        errorAttributes.put(ExceptionConstant.EXCEPTION_CHAIN_KEY, exceptionChains);
-        return errorAttributes;
-    }
-}
-
- ```
-作用:当其他feign客户端在调用接口时,如果本服务发送异常,应该怎么返回异常信息？可以理解为异常处理器抛出=>异常解析器。需要实现ErrorAttributes
- - 默认异常解析器
-```java
-//FeignExceptionDecoder    
-@Slf4j
-public class FeignExceptionDecoder implements ErrorDecoder {
-    @Override
-    public Exception decode(String methodKey, Response response) {
-        try {
-            Reader reader = response.body().asReader();
-            String body = Util.toString(reader);
-            ExceptionModel exceptionModel = JSON.parseObject(body, ExceptionModel.class);
-            return new RemoteCallException(exceptionModel.getMessage(), exceptionModel.getExceptionChain());
-        } catch (Exception e) {
-            log.error("{} has an unknown exception.", methodKey, e);
-            return new RemoteCallException("unKnowException", e);
-        }
-
-    }
-}
-```
-作用：异常解析器,需要实现ErrorDecoder。作用是,当feign服务调用其他服务出现异常,收到的异常数据流处理类.
-
- - 自定义异常处理器及解析器 
- 异常处理器需要实现ErrorAttributes、异常解析器需要实现ErrorDecoder .然后使用@EnableFeignExceptionHandler,代码如下
-
-```java
-@EnableDiscoveryClient
-@SpringBootApplication
-@EnableFeignClients
-@EnableFeignExceptionHandler(decoderClass = DecodeCoderClass.class,handlerClass =handlerClass.class )
-public class ConsumerApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(ConsumerApplication.class, args);
-    }
-}
-```
-要点: 无论是decoderClass 还是handlerClass 都需要无参构造方法。 因为EnableFeignExceptionHandler注册bean是需要初始化一个对象
-如果,确实需要注入bean或者属性, 需要实现BeanFactoryPostProcessor 来获取BeanFactory 这样就可以获取到bean了。
-但是,一般来说,处理器和解析器是不需要bean的.
 
 
 ### 5.静态spring常量容器
