@@ -21,7 +21,7 @@ maven用户
 </dependency>
 
 ```
-#### 注意：Feign是springCloud服务间互相调用的框架,是在http的基础上,所以对应的项目里面必须加入以下依赖或其核心依赖
+#### 注意：Feign是基于HTTP协议,用于SpringCloud服务间调用的框架。所以对应的项目里面必须加入以下依赖或其核心依赖
 ```xml
     <dependencies>
         <dependency>
