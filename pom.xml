@@ -7,7 +7,7 @@
     <groupId>cn.minsin.feign</groupId>
     <artifactId>feign-exception</artifactId>
     <name>feign-exception</name>
-    <version>1.0</version>
+    <version>1.1</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -66,6 +66,11 @@
             <artifactId>fastjson</artifactId>
             <version>${fastjson.version}</version>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.minsin.feign</groupId>
+            <artifactId>feign-exception</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
     <repositories>
@@ -165,20 +170,20 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-gpg-plugin</artifactId>
-                <version>${maven-gpg-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>sign-artifacts</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>sign</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.apache.maven.plugins</groupId>-->
+            <!--                <artifactId>maven-gpg-plugin</artifactId>-->
+            <!--                <version>${maven-gpg-plugin.version}</version>-->
+            <!--                <executions>-->
+            <!--                    <execution>-->
+            <!--                        <id>sign-artifacts</id>-->
+            <!--                        <phase>verify</phase>-->
+            <!--                        <goals>-->
+            <!--                            <goal>sign</goal>-->
+            <!--                        </goals>-->
+            <!--                    </execution>-->
+            <!--                </executions>-->
+            <!--            </plugin>-->
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>

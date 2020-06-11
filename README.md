@@ -160,7 +160,7 @@ Exception in thread "main" java.lang.RuntimeException: 测试异常
 
 
 ### 7.DEMO
-[下载之后在本地运行测试](https://github.com/mintonzhang/feign-exception/tree/master/demo)。
+[下载之后在本地运行测试](https://github.com/mintonzhang/feign-exception-demo)。
 
 
 
