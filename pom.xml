@@ -19,7 +19,7 @@
         <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
-        <fastjson.version>1.2.70</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
